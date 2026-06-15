@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Petewar — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0b0e17;
+    --surface: #111520;
+    --card: #161b2e;
+    --border: rgba(255,255,255,0.07);
+    --accent: #1A73E8;
+    --accent2: #34d399;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --heading: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw;
+    height: 60px;
+    background: rgba(11,14,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 6vw 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(26,115,232,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,115,232,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute; top: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(26,115,232,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -50px; right: 5vw;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(52,211,153,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: var(--heading);
+    font-size: clamp(44px, 7vw, 80px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  h1 .accent-green { color: var(--accent2); }
+  .hero-desc {
+    max-width: 580px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 24px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 24px;
+    background: transparent;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: var(--heading);
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* SECTIONS */
+  section { padding: 90px 6vw; }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-family: var(--heading);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #fff;
+    margin-bottom: 48px;
+  }
+  h2 .dim { color: var(--muted); font-weight: 400; }
+
+  /* SKILLS */
+  #skills { background: var(--surface); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: rgba(26,115,232,0.4); transform: translateY(-2px); }
+  .skill-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .skill-icon.blue { background: rgba(26,115,232,0.15); }
+  .skill-icon.green { background: rgba(52,211,153,0.12); }
+  .skill-icon.purple { background: rgba(139,92,246,0.15); }
+  .skill-icon.amber { background: rgba(245,158,11,0.12); }
+  .skill-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+  .project-card:hover { border-color: rgba(26,115,232,0.4); transform: translateY(-3px); }
+  .project-type {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    font-weight: 600;
+  }
+  .project-title {
+    font-family: var(--heading);
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .project-desc { font-size: 14px; color: var(--muted); line-height: 1.65; flex: 1; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack-tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(26,115,232,0.12);
+    color: #7aadee;
+    font-weight: 500;
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--surface); }
+  .exp-timeline { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-date { font-size: 13px; color: var(--muted); padding-top: 4px; }
+  .exp-role {
+    font-family: var(--heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .exp-company {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .exp-bullets { padding-left: 18px; }
+  .exp-bullets li {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    line-height: 1.6;
+  }
+  .exp-bullets li::marker { color: var(--accent2); }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+  }
+  .edu-degree {
+    font-size: 13px; color: var(--accent2); font-weight: 600;
+    letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .edu-institution {
+    font-family: var(--heading);
+    font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 4px;
+  }
+  .edu-period { font-size: 13px; color: var(--muted); }
+
+  /* CONTACT */
+  #contact { text-align: center; }
+  .contact-card {
+    max-width: 580px; margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 52px 40px;
+  }
+  .contact-desc {
+    color: var(--muted); margin-bottom: 36px; font-size: 16px;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .exp-date { padding-top: 0; }
+    h1 { letter-spacing: -1px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Adi<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner"><div style="position:relative">
+    <p class="hero-eyebrow">Available for Internships &amp; Projects</p>
+    <h1>
+      Turning data<br>into <span class="accent-green">decisions.</span>
+    </h1>
+    <p class="hero-desc">
+      I'm Aditya Petewar — an IT student at PCCOE Pune building at the intersection of
+      data science, machine learning, and full-stack development.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects →</a>
+      <a href="mailto:adityapetewar4@gmail.com" class="btn-secondary">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Months internship experience</div>
+      </div>
+      <div>
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Data & ML projects on GitHub</div>
+      </div>
+      <div>
+        <div class="stat-num">2027</div>
+        <div class="stat-label">B.Tech graduation, PCCOE</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">What I work with</p>
+  <h2>Technical Skills <span class="dim">/ Stack</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon blue">🐍</div>
+      <div class="skill-name">Data & Analytics</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">Pandas</span>
+        <span class="tag">NumPy</span><span class="tag">SQL</span>
+        <span class="tag">Matplotlib</span><span class="tag">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon purple">📊</div>
+      <div class="skill-name">Business Intelligence</div>
+      <div class="skill-tags">
+        <span class="tag">Power BI</span><span class="tag">DAX</span>
+        <span class="tag">Excel</span><span class="tag">Dashboards</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon green">🤖</div>
+      <div class="skill-name">Machine Learning</div>
+      <div class="skill-tags">
+        <span class="tag">Scikit-learn</span><span class="tag">Regression</span>
+        <span class="tag">Classification</span><span class="tag">Gen AI</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon blue">⚙️</div>
+      <div class="skill-name">Backend Development</div>
+      <div class="skill-tags">
+        <span class="tag">Java</span><span class="tag">Spring Boot</span>
+        <span class="tag">Node.js</span><span class="tag">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon amber">🌐</div>
+      <div class="skill-name">Frontend</div>
+      <div class="skill-tags">
+        <span class="tag">React.js</span><span class="tag">HTML</span>
+        <span class="tag">CSS</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon purple">🗄️</div>
+      <div class="skill-name">Databases & Cloud</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span><span class="tag">MongoDB</span>
+        <span class="tag">AWS S3</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">What I've built</p>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <a href="https://github.com/Adistorm/Netflix-data-analysis-" target="_blank" class="project-card">
+      <div class="project-type">Data Analysis</div>
+      <div class="project-title">Netflix Data Analysis</div>
+      <div class="project-desc">
+        Explored Netflix's content library to uncover trends in genres, release patterns,
+        and regional distribution. Built visualizations to surface actionable insights.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">Matplotlib</span>
+        <span class="stack-tag">Seaborn</span>
+      </div>
+      <div class="project-link">View on GitHub →</div>
+    </a>
+    <a href="https://github.com/Adistorm/customer_behaviour_analysis" target="_blank" class="project-card">
+      <div class="project-type">Business Intelligence</div>
+      <div class="project-title">Customer Behaviour Analysis</div>
+      <div class="project-desc">
+        Analyzed customer purchase patterns and segmentation data to identify high-value
+        segments and support data-driven marketing decisions.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">Power BI</span>
+      </div>
+      <div class="project-link">View on GitHub →</div>
+    </a>
+    <a href="https://github.com/Adistorm/Covid_19_data_analysis" target="_blank" class="project-card">
+      <div class="project-type">Data Science</div>
+      <div class="project-title">COVID-19 Trend Analysis</div>
+      <div class="project-desc">
+        Tracked and visualized global COVID-19 spread, mortality, and recovery rates
+        across time and geography using public health datasets.
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">NumPy</span>
+        <span class="stack-tag">Matplotlib</span>
+        <span class="stack-tag">Seaborn</span>
+      </div>
+      <div class="project-link">View on GitHub →</div>
+    </a>
+  </div>
+  <div style="margin-top: 28px; text-align: center;">
+    <a href="https://github.com/Adistorm" target="_blank" class="btn-secondary" style="display:inline-flex;">All projects on GitHub →</a>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Where I've worked</p>
+  <h2>Experience</h2>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-date">Jun – Nov 2023<br><span style="color:#5a6478; font-size:12px;">6 months</span></div>
+      <div>
+        <div class="exp-role">Software Development Intern</div>
+        <div class="exp-company">Shri Software Solutions Limited · Patan, Maharashtra</div>
+        <ul class="exp-bullets">
+          <li>Worked with Python, NumPy, and Pandas for data cleaning, transformation, and statistical analysis on real-world datasets.</li>
+          <li>Built data visualization dashboards using Matplotlib and Seaborn to present findings to stakeholders.</li>
+          <li>Automated repetitive data workflows through custom Python scripts, reducing manual processing time.</li>
+          <li>Handled structured data pipelines for exploration, reporting, and anomaly detection.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Academic background</p>
+  <h2>Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech — Information Technology</div>
+      <div class="edu-institution">PCCOE, Pune</div>
+      <div class="edu-period">Aug 2024 – May 2027</div>
+      <div style="margin-top: 12px;">
+        <span class="tag">SDF Vidhyadhan Scholar</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Diploma — Computer Programming & Applications</div>
+      <div class="edu-institution">YCP Polytechnic</div>
+      <div class="edu-period">Completed 2024</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Certifications</div>
+      <div class="edu-institution">Google</div>
+      <div class="edu-period">Data Analytics · IT Support</div>
+      <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px;">
+        <span class="tag">Google Data Analytics</span>
+        <span class="tag">Google IT Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Let's connect</p>
+  <h2>Get in touch</h2>
+  <div class="contact-card">
+    <p class="contact-desc">
+      Looking for internship opportunities in Data Science, Software Engineering, or Full-Stack Development.
+      Open to collaborations and projects.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:adityapetewar4@gmail.com" class="btn-primary">✉ Email me</a>
+      <a href="https://www.linkedin.com/in/adityapetewar-830ab324b" target="_blank" class="btn-secondary">LinkedIn →</a>
+      <a href="https://github.com/Adistorm" target="_blank" class="btn-secondary">GitHub →</a>
+      <a href="https://www.instagram.com/adityapetewar4" target="_blank" class="btn-secondary">Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Aditya Petewar</span>
+  <span style="color:#3a4155">Built with HTML · Pune, MH</span>
+</footer>
+
+</body>
+</html>
